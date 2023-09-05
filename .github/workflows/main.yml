@@ -79,18 +79,18 @@ jobs:
     # Maven Package & Upload Apigee Budle Config in Apigee
       - name: mvn config
         run: mvn apigee-enterprise:configure -q -P eval -Dapigee.org=${{ github.event.inputs.deployment-region }} -Denv=${{
-          github.event.inputs.deployment-env}}  -Ddeployment.suffix=$APIGEE_DEPLOYMENT_SUFFIX
+          github.event.inputs.deployment-env}}  -Ddeployment.suffix=$APIGEE_DEPLOYMENT_UFFIX
 
     # Maven Deploy uploaded proxy package in to Apigeee
       - name: mvn deploy proxy xhybrid
         run: mvn apigee-enterprise:deploy -P eval -Dbearer='${{ steps.auth.outputs.access_token }}'
           -Dapigee.org=${{ github.event.inputs.deployment-region }} -Denv=${{
-          github.event.inputs.deployment-env}} -Dapigee.config.dir=./security-sharedflow
+          github.event.inputs.deployment-env}} -Dapigee.config.dir=./sharedflowbundle
           -Dapigee.config.options=update
           
       - name: mvn deploy config
         run: mvn install -P eval -Dbearer='${{ steps.auth.outputs.access_token }}'
           -Dapigee.org=${{ github.event.inputs.deployment-region }} -Denv=${{
-          github.event.inputs.deployment-env}} -Dapigee.config.dir=./security-sharedflow
+          github.event.inputs.deployment-env}} -Dapigee.config.dir=./sharedflowbundle
           -Dapigee.config.options=update
 
